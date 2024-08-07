@@ -1,23 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Link, NavLink, Route, Routes, useParams } from "react-router-dom";
+import "./App.css";
+import Home from "./Pages/Home";
+import Create from "./Pages/Create";
+import Update from "./Pages/Update";
+import Login from "./Pages/Login";
+import SignUp from "./Pages/SignUp";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [token, setToken] = useState(false);
+  if (token) {
+    sessionStorage.setItem("token", JSON.stringify(token));
+  }
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token")) {
+      const data = JSON.parse(sessionStorage.getItem("token"));
+      setToken(data);
+    }
+  }, []);
+  console.log(token);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <BrowserRouter>
+      {/* {token ? 
+        <nav className="navbar" >
+          <h1>Supabase Movies</h1>
+          <Link to="/home">Home</Link>
+          <Link to="/create">Create</Link>
+        </nav>: ""} */}
+        <Routes>
+          <Route path="/" element={<Login setToken={setToken} />} />
+          <Route path="/signUp" element={<SignUp />} />
+          {token ? (
+            <>
+            
+              <Route path="/home" element={<Home />} />
+              <Route path="/create" element={<Create />} />
+              <Route path="/:id" element={<Update />} />
+            </>
+          ) : (
+            ""
+          )}
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
