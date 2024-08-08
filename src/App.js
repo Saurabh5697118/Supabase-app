@@ -6,6 +6,7 @@ import Update from "./Pages/Update";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import { useEffect, useState } from "react";
+import Header from "./Pages/Header";
 
 function App() {
   const [token, setToken] = useState(false);
@@ -25,6 +26,7 @@ function App() {
     <div className="App">
 
       <BrowserRouter>
+      <Header />
       {/* {token ? 
         <nav className="navbar" >
           <h1>Supabase Movies</h1>

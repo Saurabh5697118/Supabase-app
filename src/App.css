@@ -8,39 +8,107 @@
   font-family: cursive;
 }
 
-.navbar{
+.navbar {
   position: absolute;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    height: 50px;
-    background: #000000;
-    width: 100%;
-    align-items: center;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  background: #000000;
+  width: 100%;
+  align-items: center;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #00000036;
+  /* height: 70px; */
+  /* padding: 20px; */
+  /* animation: 2s ease; */
+}
+.header:hover {
+  background-color: #00000085;
+}
+.header-firebase-logo {
+  display: flex;
+  color: honeydew;
+  margin: 0px 20px;
+  align-items: center;
+}
+.header-firebase-logo > img {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+.header-logout-logo {
+  display: flex;
+  margin: 0px 20px;
+  /* justify-content: center; */
+  align-items: center;
+}
+.header-logout-logo > button {
+  margin: 0px 5px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+.header-logout-logo > Link {
+  color: honeydew;
+}
+.header-logout-logo:hover > button {
+  background: rgba(245, 217, 165, 0.801);
+  /* color: white; */
 }
 
 .signUp-Login-container {
   background-color: white;
-  padding: 20px 40px;
+  padding: 10px 30px;
   border-radius: 25px;
+  display: flex;
+  align-items: center;
 }
 .signUp-login-form {
   display: flex;
   flex-direction: column;
 }
 
+.register-login-option {
+  text-align: center;
+  font-size: 10px;
+  margin-top: -5px;
+}
+.social-media-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.social-media-Orline {
+  text-align: center;
+  font-size: 10px;
+  margin: 20px 0px;
+  color: rgb(104 103 103 / 71%);
+}
+
 .creds {
   margin: 10px 0;
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
 }
-.creds > input, textarea{
+.creds > input,
+textarea {
   padding: 10px;
   cursor: pointer;
-  font-size: 16px;
+  /* font-size: 16px; */
   border-radius: 10px;
   border: none;
-  width: 300px;
+  width: 50vw;
+  max-width: 280px;
+  min-width: 200px;
   outline: none;
   background-color: #d3d3d378;
   font-family: cursive;
@@ -63,23 +131,26 @@
 
 /* Movie Cards */
 
-.home-filter{
+.home-filter {
   text-align: center;
-  margin: 30px;
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
-.home-filter > button{
+.home-filter > button {
   width: 100px;
   border-radius: 10px;
   padding: 5px;
   border: none;
   font-family: cursive;
-  margin: 0 5px;
+  margin: 15px;
   background: #faebd7a1;
   font-weight: 600;
 }
-.home-filter > button:focus{
+.home-filter > button:focus {
   font-size: large;
-  
 }
 
 .movie-cards {
@@ -103,16 +174,18 @@
   box-shadow: 1px 1px 5px 5px #0000001c;
 
   max-width: 300px;
-    min-width: 200px;
-    width: 30vw;
+  min-width: 200px;
+  width: 30vw;
 }
-.movie-card:hover, .add-card:hover {
+.movie-card:hover,
+.add-card:hover {
   transform: scale(1.1);
 }
 
 .card-rating-operator {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .card-edit-del-buttons {
   color: rgba(128, 128, 128, 0.795);
@@ -122,8 +195,8 @@
   background: white;
   border-radius: 30px;
   display: flex;
- justify-content: center;
- align-items: center;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
   margin: 30px;
   width: 50px;
@@ -132,12 +205,10 @@
   box-shadow: 1px 1px 5px 5px #0000001c;
 }
 
-
 /* Creating or Updating Movie */
 
-.update-create-movie{
+.update-create-movie {
   background-color: white;
-    border-radius: 10px;
-    padding: 20px 40px;
-
+  border-radius: 10px;
+  padding: 20px 40px;
 }

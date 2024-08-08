@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import supabase from "../Config/SupabaseClientId";
+import { useMediaQuery } from "@mui/material";
 
 const Update = () => {
+  let mobView = useMediaQuery("(max-width:576px)");
+  let tabView = useMediaQuery("(max-width:1024px)");
+  let sizes = mobView ? 14 : tabView ? 16 : 20;
+  let sizes2 = mobView ? 10 : tabView ? 12 : 16;
   const { id } = useParams();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
@@ -10,7 +15,7 @@ const Update = () => {
     Method: "",
     Rating: "",
   });
-  const [formErr, setFormErr] = useState(null);
+  // const [formErr, setFormErr] = useState(null);
   useEffect(() => {
     const fetch = async () => {
       const { data, error } = await supabase
@@ -31,10 +36,6 @@ const Update = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!userData.Title || !userData.Rating || !userData.Method) {
-      setFormErr("Kindly fill all the details");
-      return;
-    }
     const payload = {
       Title: userData.Title,
       Rating: userData.Rating,
@@ -46,11 +47,11 @@ const Update = () => {
       .eq("id", id)
       .select();
     if (error) {
-      setFormErr("Some Err");
+      alert(error.message);
     }
 
     if (data.length) {
-      setFormErr(null);
+      // setFormErr(null);
       navigate("/home");
     }
   };
@@ -58,47 +59,65 @@ const Update = () => {
   return (
     <div className="update-create-movie">
       <form onSubmit={handleSubmit}>
-      <h2 style={{marginBottom: 40}}>Update Movie Details </h2>
+        <h2 style={{ marginBottom: 40, fontSize: sizes }}>
+          Update Movie Details{" "}
+        </h2>
         <div className="creds">
-          <label htmlFor="Title">Title</label>
+          <label style={{ fontSize: sizes2 }} htmlFor="Title">
+            Title
+          </label>
           <input
             id="Title"
+            required
             placeholder="Title..."
             value={userData.Title}
             type="text"
+            style={{ fontSize: sizes2 }}
             onChange={(e) =>
               setUserData({ ...userData, [e.target.id]: e.target.value })
             }
           />
         </div>
         <div className="creds">
-        <label htmlFor="Method">Method</label>
-        <textarea
-          id="Method"
-          placeholder="Description..."
-          value={userData.Method}
-          onChange={(e) =>
-            setUserData({ ...userData, [e.target.id]: e.target.value })
-          }
-        /></div>
-        <div className="creds">
-        <label htmlFor="Rating">Rating</label>
-        <input
-          id="Rating"
-          value={userData.Rating}
-          type="number"
-          placeholder="Rating..."
-          max={5}
-          min={0}
-          onChange={(e) =>
-            setUserData({ ...userData, [e.target.id]: e.target.value })
-          }
-        />
+          <label style={{ fontSize: sizes2 }} htmlFor="Method">
+            Description
+          </label>
+          <textarea
+            id="Method"
+            required
+            placeholder="Description..."
+            value={userData.Method}
+            style={{ fontSize: sizes2 }}
+            onChange={(e) =>
+              setUserData({ ...userData, [e.target.id]: e.target.value })
+            }
+          />
         </div>
-        
         <div className="creds">
-        <button type="submit">Submit</button></div>
-        {formErr && <h6>{formErr}</h6>}
+          <label style={{ fontSize: sizes2 }} htmlFor="Rating">
+            Rating
+          </label>
+          <input
+            id="Rating"
+            required
+            value={userData.Rating}
+            type="number"
+            placeholder="Rating..."
+            max={5}
+            min={0}
+            style={{ fontSize: sizes2 }}
+            onChange={(e) =>
+              setUserData({ ...userData, [e.target.id]: e.target.value })
+            }
+          />
+        </div>
+
+        <div className="creds">
+          <button style={{ fontSize: sizes2 }} type="submit">
+            Submit
+          </button>
+        </div>
+        {/* {formErr && <h6>{formErr}</h6>} */}
       </form>
     </div>
   );

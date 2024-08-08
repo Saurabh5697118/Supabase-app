@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import supabase from "../Config/SupabaseClientId";
 import { Link, useNavigate } from "react-router-dom";
+import LoginPageLogo from "../Components/LoginPageLogo";
+import { useMediaQuery } from "@mui/material";
 
 const SignUp = () => {
+  let mobView = useMediaQuery("(max-width:576px)");
+  let tabView = useMediaQuery("(max-width:1024px)");
+  let sizes = mobView ? 14 : tabView ? 16 : 20;
+  let sizes2 = mobView ? 10 : tabView ? 12 : 16;
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     name: "",
@@ -14,10 +20,7 @@ const SignUp = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!userData.email || !userData.name || !userData.password){
-      alert("Please fill all the fields");
-      return
-    }
+   
     const { data, error } = await supabase.auth.signUp({
       email: userData.email,
       password: userData.password,
@@ -37,41 +40,53 @@ const SignUp = () => {
   };
   return (
     <div className="signUp-Login-container">
-      <form onSubmit={handleSubmit} className="signUp-login-form">
-        <h2>SignUp</h2>
-        <div className="creds">
-          <input
-            name="name"
-            value={userData.name}
-            onChange={handleChange}
-            placeholder="Name..."
-          />
-        </div>
-        <div className="creds">
-          <input
-            name="email"
-            type="email"
-            value={userData.email}
-            onChange={handleChange}
-            placeholder="Email..."
-          />
-        </div>
-        <div className="creds">
-          <input
-            name="password"
-            type="password"
-            value={userData.password}
-            onChange={handleChange}
-            placeholder="Password..."
-          />
-        </div>
-        <div className="creds">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+      {" "}
+      <LoginPageLogo />
+      <div>
+        <form onSubmit={handleSubmit} className="signUp-login-form">
+          <h2 style={{ fontSize: sizes }}>SignUp</h2>
+          <div className="creds">
+            <input
+              name="name"
+              value={userData.name}
+              onChange={handleChange}
+              required
+              style={{ fontSize: sizes2 }}
+              placeholder="Name..."
+            />
+          </div>
+          <div className="creds">
+            <input
+              name="email"
+              type="email"
+              value={userData.email}
+              required
+              style={{ fontSize: sizes2 }}
+              onChange={handleChange}
+              placeholder="Email..."
+            />
+          </div>
+          <div className="creds">
+            <input
+              name="password"
+              type="password"
+              value={userData.password}
+              onChange={handleChange}
+              required
+              style={{ fontSize: sizes2 }}
+              placeholder="Password..."
+            />
+          </div>
+          <div className="creds">
+            <button style={{ fontSize: sizes2 }} type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
 
-      <div style={{ textAlign: "center", fontSize: 10 }}>
-        Already Have an account? <Link to="/">Login</Link>
+        <div style={{ textAlign: "center", fontSize: 10 }}>
+          Already Have an account? <Link to="/">Login</Link>
+        </div>
       </div>
     </div>
   );

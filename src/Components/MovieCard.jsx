@@ -5,8 +5,12 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
+import { useMediaQuery } from "@mui/material";
 
 const MovieCard = ({ movie, onDelete }) => {
+  let mobView = useMediaQuery("(max-width:576px)")
+  let tabView = useMediaQuery("(max-width:1024px)")
+  let sizes =  mobView ? 14 : tabView ? 18 : 24;
   const navigate = useNavigate();
   const handleDelete = async () => {
     const { data, error } = await supabase
@@ -19,7 +23,6 @@ const MovieCard = ({ movie, onDelete }) => {
     if (data.length) onDelete(movie.id);
   };
 
-  let sizes = window.innerWidth < 576 ? 10 : window.innerWidth < 1024 ? 16 : 24;
   const rated = (
     <StarOutlinedIcon sx={{ color: "#ffa500a1", fontSize: sizes }} />
   );
@@ -28,18 +31,14 @@ const MovieCard = ({ movie, onDelete }) => {
   );
   return (
     <div className="movie-card">
-      <div style={{ fontWeight: 550, fontSize: 24, marginBottom: 30 }}>
+      <div style={{ fontWeight: 550, fontSize: sizes, marginBottom: 30 }}>
         {movie.Title}
       </div>
-      {/* <hr  /> */}
-      {/* <h5>{movie.Method}</h5> */}
-      {/* <h6>{movie.Rating}</h6> */}
       <div className="card-rating-operator">
-        {/* <div style={{ fontWeight: 300, fontSize: 16, color: "#515050"  }}>Rating: {`${stars}`.repeat(movie.Rating)}</div> */}
-        <div
+       <div
           style={{
             fontWeight: 300,
-            fontSize: 16,
+            fontSize: mobView ? 10 : tabView ? 12 : 18,
             color: "#515050",
             display: "flex",
           }}
