@@ -21,6 +21,7 @@ const Create = () => {
       .insert([{ Title: title, Method: method, Rating: rating }]);
     if (!error) {
       navigate("/home");
+      return
     }
     alert(error.message);
   };

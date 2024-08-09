@@ -12,9 +12,9 @@ const Home = () => {
   const handleDelete = (id) => {
     setAllMovies((prevMovies) => prevMovies.filter((data) => data.id !== id));
   };
-  window.scrollTo(0, 0);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getDatas = async () => {
       const { data, error } = await supabase
         .from("SupaMovies")
@@ -49,23 +49,25 @@ const Home = () => {
       </div>
       {err && <h4>{err}</h4>}
       <div className="movie-cards">
-        {allMovies.map((movie, ind) => {
-          const animationDelay = 100;
-          const animationDuration = 500;
-          const anim = `movieCardDisplay ${animationDuration}ms ease-out ${
-            animationDelay * (ind + 1)
-          }ms forwards`;
-          return (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              onDelete={handleDelete}
-              style={{ animation: anim, opacity: 0 }}
-            />
-          );
-        })}
+        {allMovies &&
+          allMovies.map((movie, ind) => {
+            const animationDelay = 100;
+            const animationDuration = 500;
+            const anim = `movieCardDisplay ${animationDuration}ms ease-out ${
+              animationDelay * (ind + 1)
+            }ms forwards`;
+            return (
+              <div style={{ animation: anim, opacity: 0 }}>
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  onDelete={handleDelete}
+                />
+              </div>
+            );
+          })}
 
-        {allMovies.length ? (
+        {allMovies ? (
           <div
             className="add-card"
             onClick={() => navigate("/create")}

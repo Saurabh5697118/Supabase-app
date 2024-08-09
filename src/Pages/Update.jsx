@@ -26,6 +26,7 @@ const Update = () => {
 
       if (error) {
         navigate("/home", { replace: "true" });
+        return
       }
       if (data.id) {
         setUserData(data);
@@ -48,6 +49,7 @@ const Update = () => {
       .select();
     if (error) {
       alert(error.message);
+      return
     }
 
     if (data.length) {
