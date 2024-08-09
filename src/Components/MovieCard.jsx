@@ -43,8 +43,8 @@ const MovieCard = ({ movie, onDelete }) => {
             display: "flex",
           }}
         >
-          Rating: {[...Array(movie.Rating)].map((data) => rated)}
-          {[...Array(5 - movie.Rating)].map((data) => unRated)}
+          Rating: {[...Array(+movie.Rating)].map(() => rated)}
+          {[...Array(5 - +movie.Rating)].map(() => unRated)}
         </div>
 
         <div className="card-edit-del-buttons">

@@ -117,6 +117,11 @@ const Update = () => {
             Submit
           </button>
         </div>
+        <div className="creds">
+          <button style={{ fontSize: sizes2, backgroundColor: "#e61212b8" }} onClick={() => navigate(-1)}>
+            Back
+          </button>
+        </div>
         {/* {formErr && <h6>{formErr}</h6>} */}
       </form>
     </div>

@@ -12,6 +12,7 @@ const Home = () => {
   const handleDelete = (id) => {
     setAllMovies((prevMovies) => prevMovies.filter((data) => data.id !== id));
   };
+  window.scrollTo(0, 0);
 
   useEffect(() => {
     const getDatas = async () => {
@@ -48,14 +49,36 @@ const Home = () => {
       </div>
       {err && <h4>{err}</h4>}
       <div className="movie-cards">
-        {allMovies &&
-          allMovies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} onDelete={handleDelete} />
-          ))}
+        {allMovies.map((movie, ind) => {
+          const animationDelay = 100;
+          const animationDuration = 500;
+          const anim = `movieCardDisplay ${animationDuration}ms ease-out ${
+            animationDelay * (ind + 1)
+          }ms forwards`;
+          return (
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              onDelete={handleDelete}
+              style={{ animation: anim, opacity: 0 }}
+            />
+          );
+        })}
 
-        <div className="add-card" onClick={() => navigate("/create")}>
-          <AddCircleTwoToneIcon />
-        </div>
+        {allMovies.length ? (
+          <div
+            className="add-card"
+            onClick={() => navigate("/create")}
+            style={{
+              animation: `movieCardDisplay 500ms ease-out ${
+                100 * (allMovies.length + 2)
+              }ms forwards`,
+              opacity: 0,
+            }}
+          >
+            <AddCircleTwoToneIcon />
+          </div>
+        ) : null}
       </div>
     </div>
   );
