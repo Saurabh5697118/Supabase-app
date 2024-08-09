@@ -44,7 +44,7 @@ const Header = () => {
           <>
             {!mobView ? (
               <>
-                <Avatar >{token.user.user_metadata.name[0]}</Avatar>
+                <Avatar />
                 <button onClick={() => handleSignOut()}>Logout</button>
               </>
             ) : (

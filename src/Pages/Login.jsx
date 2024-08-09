@@ -38,14 +38,19 @@ const Login = ({ setToken }) => {
   const onGoogleSignIn = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
+      // options: {
+      //   redirectTo: 'http://localhost:3002/'
+      // }
     });
+    console.log(data, error);
+    
 
     if (error) {
       alert(error.message);
       return;
     }
 
-    alert("Sucessfully Logged In!");
+    // alert("Sucessfully Logged In!");
     setToken(data);
     navigate("/home");
   };

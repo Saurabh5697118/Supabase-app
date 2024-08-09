@@ -57,12 +57,8 @@ const Home = () => {
               animationDelay * (ind + 1)
             }ms forwards`;
             return (
-              <div style={{ animation: anim, opacity: 0 }}>
-                <MovieCard
-                  key={movie.id}
-                  movie={movie}
-                  onDelete={handleDelete}
-                />
+              <div style={{ animation: anim, opacity: 0 }} key={movie.id}>
+                <MovieCard movie={movie} onDelete={handleDelete} />
               </div>
             );
           })}
