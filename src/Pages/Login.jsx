@@ -42,15 +42,10 @@ const Login = ({ setToken }) => {
       //   redirectTo: 'http://localhost:3002/'
       // }
     });
-    console.log(data, error);
-    
-
     if (error) {
       alert(error.message);
       return;
     }
-
-    // alert("Sucessfully Logged In!");
     setToken(data);
     navigate("/home");
   };
@@ -99,9 +94,9 @@ const Login = ({ setToken }) => {
         <div className="social-media-icons">
           <button
             // disabled={isSigningIn}
-            onClick={(e) => {
-              onGoogleSignIn(e);
-            }}
+            // onClick={(e) => {
+            //   onGoogleSignIn(e);
+            // }}
             style={{
               background: "transparent",
               border: "none",
